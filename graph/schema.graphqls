@@ -1,0 +1,18 @@
+type Poll {
+    question: String!
+    answerA: VotedAnswer!
+    answerB: VotedAnswer!
+}
+
+type VotedAnswer {
+    answer: String!
+    votes: Int
+}
+
+type Query {
+    polls: [Poll!]!
+}
+
+type Mutation {
+    createPoll(question: String!, answerA: String!, answerB: String!): Poll
+}
