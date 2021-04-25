@@ -4,6 +4,8 @@ type Poll {
     answerB: VotedAnswer!
 }
 
+
+
 type VotedAnswer {
     answer: String!
     votes: Int
