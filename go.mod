@@ -1,4 +1,4 @@
-module github.com/cadazab/gqlgenServer
+module github.com/cadazab/go-graphql-server
 
 go 1.16
 
