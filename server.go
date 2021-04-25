@@ -1,6 +1,7 @@
 package main
 
 import (
+	"log"
 	"os"
 
 	"github.com/99designs/gqlgen/graphql/handler"
@@ -32,6 +33,9 @@ func playgroundHandler() gin.HandlerFunc {
 
 func main() {
 	port := os.Getenv("PORT")
+	if port == "" {
+		log.Fatal("$PORT must be set")
+	}
 	// Setting up Gin
 	r := gin.New()
 	r.Use(gin.Logger())
