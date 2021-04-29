@@ -1,13 +1,13 @@
 package main
 
 import (
-	"log"
 	"os"
 
 	"github.com/99designs/gqlgen/graphql/handler"
 	"github.com/99designs/gqlgen/graphql/playground"
 	"github.com/cadazab/gqlgenServer/graph"
 	"github.com/cadazab/gqlgenServer/graph/generated"
+	"github.com/gin-contrib/cors"
 	"github.com/gin-gonic/gin"
 )
 
@@ -34,13 +34,19 @@ func playgroundHandler() gin.HandlerFunc {
 func main() {
 	port := os.Getenv("PORT")
 	if port == "" {
-		log.Fatal("$PORT must be set")
+		os.Setenv("PORT", "8080")
+		port = "8080"
 	}
 	// Setting up Gin
 	r := gin.New()
 	r.Use(gin.Logger())
+
+	config := cors.DefaultConfig()
+	config.AllowAllOrigins = true
+	config.AllowOrigins = []string{"http://localhost", "https://routify-app.vercel.app/"}
+	r.Use(cors.Default())
+
 	r.POST("/query", graphqlHandler())
 	r.GET("/", playgroundHandler())
 	r.Run(":" + port)
-
 }
