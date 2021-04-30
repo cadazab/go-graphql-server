@@ -1,1 +1,1 @@
-web: bin/go-graphql-server
+web: bin/gqlgenServer
